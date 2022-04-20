@@ -43,7 +43,7 @@ Route::get('/admin/pelanggan', function () {
 });
 
 Route::get('/test', function () {
-    return 'ini halamn test';
+    return 'test v2';
 });
 
 Route::get('/bootstrap', function () {
