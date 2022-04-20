@@ -27,6 +27,13 @@ node {
         }
     }
 
+    // Testing Kedua
+    stage("Test"){
+        docker.image('ubuntu').inside('-u root') {
+            sh 'echo "Ini adalah test"'
+        }
+    }
+
     // deploy env prod
     stage("Deploy"){
         docker.image('agung3wi/alpine-rsync:1.1').inside('-u root') {
