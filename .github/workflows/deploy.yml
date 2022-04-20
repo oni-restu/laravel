@@ -17,14 +17,14 @@ jobs:
           php-version: "7.4"
       - uses: "ramsey/composer-install@v1"
         with:
-          composer-options: "--working-dir=backend"
+          composer-options: ""
       - name: Sync
         env:
           dest: "ubuntu@${{secrets.HOST}}:~/prod.kelasdevops.xyz/"
         run: |
           echo "${{secrets.DEPLOY_KEY}}" > ~/deploy_key
           chmod 600 ~/deploy_key
-          cd backend && rsync -chav --delete \
+          rsync -chav --delete \
             -e 'ssh -i ~/deploy_key -o StrictHostKeyChecking=no' \
             --exclude ~/deploy_key \
             --exclude .git/ \
