@@ -43,7 +43,7 @@ Route::get('/admin/pelanggan', function () {
 });
 
 Route::get('/test', function () {
-    return 'test v2';
+    return 'test v3';
 });
 
 Route::get('/bootstrap', function () {
