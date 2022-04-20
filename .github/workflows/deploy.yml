@@ -20,7 +20,7 @@ jobs:
           composer-options: ""
       - name: Sync
         env:
-          dest: "ubuntu@${{secrets.HOST}}:~/prod.kelasdevops.xyz/"
+          dest: "ubuntu@54.251.5.36:~/prod.kelasdevops.xyz/"
         run: |
           echo "${{secrets.DEPLOY_KEY}}" > ~/deploy_key
           chmod 600 ~/deploy_key
