@@ -20,12 +20,12 @@ node {
     // deploy env prod
     stage("Deploy"){
         docker.image('agung3wi/alpine-rsync:1.1').inside('-u root') {
-            // sshagent (credentials: ['ssh-prod']) {
-            //     sh 'mkdir -p ~/.ssh'
-            //     sh 'ssh-keyscan -H "44.202.114.4" > ~/.ssh/known_hosts'
-            //     sh "rsync -rav --delete ./ ubuntu@44.202.114.4:/home/ubuntu/prod.kelasdevops.xyz/ --exclude=.env --exclude=storage --exclude=.git"
-            //     sh "ssh ubuntu@44.202.114.4 'cd ~/prod.kelasdevops.xyz/ && rm composer.lock && composer install'"
-            // }
+            sshagent (credentials: ['ssh-prod']) {
+                sh 'mkdir -p ~/.ssh'
+                sh 'ssh-keyscan -H "$PROD_HOST" > ~/.ssh/known_hosts'
+                sh "rsync -rav --delete ./ ubuntu@$PROD_HOST:/home/ubuntu/prod.kelasdevops.xyz/ --exclude=.env --exclude=storage --exclude=.git"
+                sh "ssh ubuntu@$PROD_HOST 'cd ~/prod.kelasdevops.xyz/ && rm composer.lock && composer install'"
+            }
         }
     }
 }
