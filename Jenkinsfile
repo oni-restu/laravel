@@ -33,7 +33,7 @@ node {
             sshagent (credentials: ['ssh-prod']) {
                 sh 'mkdir -p ~/.ssh'
                 sh 'ssh-keyscan -H "$PROD_HOST" > ~/.ssh/known_hosts'
-                sh 'cd /home/ubuntu/dev.kelasdevops.xyz/ && php artisan test --testsuite=Feature'
+                sh "ssh ubuntu@$PROD_HOST 'cd /home/ubuntu/dev.kelasdevops.xyz/ && php artisan test --testsuite=Feature'"
             }
         }
     }
