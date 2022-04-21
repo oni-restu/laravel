@@ -29,8 +29,12 @@ node {
 
     // Testing Kedua
     stage("Test"){
-        docker.image('ubuntu').inside('-u root') {
-            sh 'echo "Ini adalah test"'
+        docker.image('agung3wi/alpine-rsync:1.1').inside('-u root') {
+            sshagent (credentials: ['ssh-prod']) {
+                sh 'mkdir -p ~/.ssh'
+                sh 'ssh-keyscan -H "$PROD_HOST" > ~/.ssh/known_hosts'
+                sh 'cd /home/ubuntu/dev.kelasdevops.xyz/ && php artisan test --testsuite=Feature'
+            }
         }
     }
 
